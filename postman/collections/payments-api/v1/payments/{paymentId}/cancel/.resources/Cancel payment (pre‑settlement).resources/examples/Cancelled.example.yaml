@@ -9,7 +9,7 @@ request:
       value: Bearer <token>
       description: "Added as a part of security scheme: bearer"
   pathVariables:
-    paymentId: string
+    paymentId: pay_1001
   body:
     type: text
     content: ""
@@ -22,10 +22,10 @@ response:
     type: json
     content: |-
       {
-        "id": "string",
-        "amount": 4666,
-        "currency": "string",
+        "id": "pay_1001",
+        "amount": 2500,
+        "currency": "USD",
         "status": "FAILED",
-        "createdAt": "1995-07-25T15:36:59.891Z"
+        "createdAt": "2026-02-23T16:00:00Z"
       }
 order: 1000

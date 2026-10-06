@@ -5,7 +5,7 @@ method: GET
 headers:
   Accept: application/json
 pathVariables:
-  paymentId: string
+  paymentId: pay_1001
 body:
   type: text
   content: ""

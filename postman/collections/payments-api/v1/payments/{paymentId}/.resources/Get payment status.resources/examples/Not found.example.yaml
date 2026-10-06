@@ -7,7 +7,7 @@ request:
       value: Bearer <token>
       description: "Added as a part of security scheme: bearer"
   pathVariables:
-    paymentId: string
+    paymentId: pay_1001
   body:
     type: text
     content: ""

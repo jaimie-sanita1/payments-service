@@ -5,7 +5,7 @@ variables:
   region: us
   baseUrl: https://{{tenant}}.payments.{{region}}.example.com/api
 auth:
-  - id: b2cd4882-f36f-46e8-b0d5-06a10d6f0b0c
+  - id: 0062000d-6170-46c0-9b14-87f5bec5c952
     type: bearer
     name: bearer auth
     credentials:

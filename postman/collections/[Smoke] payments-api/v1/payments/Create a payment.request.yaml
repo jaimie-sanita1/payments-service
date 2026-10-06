@@ -3,20 +3,20 @@ description: ""
 url: "{{baseUrl}}/v1/payments"
 method: POST
 headers:
-  Idempotency-Key: string
+  Idempotency-Key: 7c9e6679-7425-40de-944b-e07fc1f90ae7
   Content-Type: application/json
   Accept: application/json
 body:
   type: json
   content: |-
     {
-      "amount": 1394,
-      "currency": "string",
+      "amount": 2500,
+      "currency": "USD",
       "method": {
         "type": "card",
-        "cardToken": "string"
+        "cardToken": "tok_visa_4242"
       },
-      "description": "string"
+      "description": "Order 4821"
     }
 scripts:
   - type: afterResponse
