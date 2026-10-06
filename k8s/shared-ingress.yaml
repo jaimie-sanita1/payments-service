@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: demo-ingress
-  namespace: accounts
+  namespace: payments
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /$1
@@ -11,24 +11,10 @@ spec:
   rules:
     - http:
         paths:
-          - path: /identity/?(.*)
+          - path: /payments/?(.*)
             pathType: ImplementationSpecific
             backend:
               service:
-                name: identity-api
-                port:
-                  number: 3001
-          - path: /accounts/?(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: accounts-api
+                name: payments-api
                 port:
                   number: 3002
-          - path: /catalog/?(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: catalog-api
-                port:
-                  number: 3003

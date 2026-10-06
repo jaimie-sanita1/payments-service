@@ -25,6 +25,7 @@ paths:
           required: true
           schema:
             type: string
+            example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
       requestBody:
         required: true
         content:
@@ -47,6 +48,7 @@ paths:
           required: true
           schema:
             type: string
+            example: pay_1001
       responses:
         '200':
           description: Payment
@@ -65,6 +67,7 @@ paths:
           required: true
           schema:
             type: string
+            example: pay_1001
       responses:
         '200':
           description: Cancelled
@@ -91,10 +94,13 @@ components:
       properties:
         id:
           type: string
+          example: pay_1001
         amount:
           type: integer
+          example: 2500
         currency:
           type: string
+          example: USD
         status:
           type: string
           enum:
@@ -106,6 +112,7 @@ components:
         createdAt:
           type: string
           format: date-time
+          example: '2026-02-23T16:00:00Z'
     PaymentCreateRequest:
       type: object
       required:
@@ -115,12 +122,15 @@ components:
       properties:
         amount:
           type: integer
+          example: 2500
         currency:
           type: string
+          example: USD
         method:
           $ref: '#/components/schemas/PaymentMethod'
         description:
           type: string
+          example: Order 4821
     PaymentMethod:
       type: object
       properties:
@@ -130,3 +140,4 @@ components:
             - card
         cardToken:
           type: string
+          example: tok_visa_4242

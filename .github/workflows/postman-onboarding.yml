@@ -28,6 +28,16 @@ jobs:
           environments-json: '["dev","prod"]'
           mock-visibility: private
           generate-ci-workflow: 'true'
+          # Reuse what the first run created instead of creating duplicates
+          mock-url: https://2f560973-4d57-411f-8c5f-a12e4939fadf.mock.pstmn.io
+          environment-uids-json: '{"dev":"56136551-c054bdd8-6cde-44bb-842e-d2ce5342227f","prod":"56136551-070b9613-4164-4d80-b4b4-b98db7d9556d"}'
+          # dev -> local kind cluster behind ingress-nginx, prod -> private mock (what CI runs against)
+          env-runtime-urls-json: '{"dev":"http://localhost/payments","prod":"https://2f560973-4d57-411f-8c5f-a12e4939fadf.mock.pstmn.io"}'
+          # Insights turns on automatically once the human-user secrets exist
+          enable-insights: ${{ secrets.INSIGHTS_POSTMAN_API_KEY != '' && secrets.INSIGHTS_POSTMAN_ACCESS_TOKEN != '' && 'true' || 'false' }}
+          insights-postman-api-key: ${{ secrets.INSIGHTS_POSTMAN_API_KEY }}
+          insights-postman-access-token: ${{ secrets.INSIGHTS_POSTMAN_ACCESS_TOKEN }}
+          cluster-name: demo
           postman-region: us
           postman-api-key: ${{ secrets.POSTMAN_API_KEY }}
           postman-access-token: ${{ steps.postman-token.outputs.token }}

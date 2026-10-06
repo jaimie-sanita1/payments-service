@@ -25,10 +25,10 @@ done
 # Config
 #####################################
 CLUSTER_NAME="${CLUSTER_NAME:-demo}"
-APPS_YAML="${APPS_YAML:-k8s/apps.yaml}"
+APPS_YAML="${APPS_YAML:-k8s/payments.yaml}"
 POSTMAN_DS_LOCAL="${POSTMAN_DS_LOCAL:-k8s/postman-insights-agent-daemonset.yaml}"
 
-DEMO_NS="${DEMO_NS:-demo}"
+DEMO_NS="${DEMO_NS:-payments}"
 POSTMAN_NS="${POSTMAN_NS:-postman-insights-namespace}"
 INSIGHTS_SECRET_NAME="${INSIGHTS_SECRET_NAME:-postman-insights-secret}"
 
@@ -95,7 +95,7 @@ run "kubectl delete namespace ${POSTMAN_NS} --ignore-not-found=true"
 # 4) Variant namespaces (if used)
 #####################################
 if [[ "${POSTMAN_VARIANTS}" == "1" ]]; then
-  for v in identity accounts catalog; do
+  for v in payments; do
     ns="${VARIANT_NS_PREFIX}${v}"
     echo "🗑️  Deleting variant namespace '${ns}'"
     run "kubectl delete namespace ${ns} --ignore-not-found=true"
@@ -110,7 +110,7 @@ run "kubectl delete clusterrole postman-insights-read-only-role --ignore-not-fou
 run "kubectl delete clusterrolebinding postman-insights-view-all-resources-binding --ignore-not-found=true"
 
 if [[ "${POSTMAN_VARIANTS}" == "1" ]]; then
-  for v in identity accounts catalog; do
+  for v in payments; do
     run "kubectl delete clusterrole postman-insights-read-only-role-${v} --ignore-not-found=true"
     run "kubectl delete clusterrolebinding postman-insights-view-all-resources-binding-${v} --ignore-not-found=true"
   done
