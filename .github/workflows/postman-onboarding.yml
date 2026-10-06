@@ -1,7 +1,18 @@
 name: Postman API onboarding
 
+# Repeatable: point this at a new (APIM-imported) workspace by changing the
+# workspace-id default below, or by typing a different id when you run it.
 on:
   workflow_dispatch:
+    inputs:
+      workspace-id:
+        description: Postman workspace to onboard
+        required: true
+        default: a1ae5022-d368-4e0d-a65b-463f2099a9f5
+      workspace-team-id:
+        description: Sub-team that owns the workspace (leave default unless it moved teams)
+        required: true
+        default: '132109'
 
 jobs:
   onboarding:
@@ -11,6 +22,17 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v5
+
+      # Generated files from a previous workspace (collection/environment UIDs, ledgers)
+      # would be reused by the action, so clear them whenever the workspace changes.
+      - name: Reset generated Postman state for a new workspace
+        run: |
+          previous="$(awk '/^workspace:/{f=1;next} f&&/id:/{print $2;exit}' .postman/resources.yaml 2>/dev/null || true)"
+          if [ "$previous" != "${{ inputs.workspace-id }}" ]; then
+            echo "Workspace changed (${previous:-none} -> ${{ inputs.workspace-id }}); clearing generated state"
+            git rm -rq --ignore-unmatch .postman postman
+            rm -rf .postman postman
+          fi
 
       - id: postman-token
         uses: postman-cs/postman-resolve-service-token-action@v2
@@ -22,17 +44,43 @@ jobs:
         uses: postman-cs/postman-api-onboarding-action@v3
         with:
           project-name: payments-api
-          workspace-id: a1ae5022-d368-4e0d-a65b-463f2099a9f5
-          workspace-team-id: '132109'
+          workspace-id: ${{ inputs.workspace-id }}
+          workspace-team-id: ${{ inputs.workspace-team-id }}
           spec-path: openapi.yaml
           environments-json: '["dev","prod"]'
           mock-visibility: private
-          generate-ci-workflow: 'true'
+          # ci.yml is maintained in the repo; it looks the mock URL up at run time
+          generate-ci-workflow: 'false'
+          # dev -> local kind cluster behind ingress-nginx
+          env-runtime-urls-json: '{"dev":"http://localhost/payments"}'
+          # Insights turns on automatically once the human-user secrets exist
+          enable-insights: ${{ secrets.INSIGHTS_POSTMAN_API_KEY != '' && secrets.INSIGHTS_POSTMAN_ACCESS_TOKEN != '' && 'true' || 'false' }}
+          insights-postman-api-key: ${{ secrets.INSIGHTS_POSTMAN_API_KEY }}
+          insights-postman-access-token: ${{ secrets.INSIGHTS_POSTMAN_ACCESS_TOKEN }}
+          cluster-name: demo
           postman-region: us
           postman-api-key: ${{ secrets.POSTMAN_API_KEY }}
           postman-access-token: ${{ steps.postman-token.outputs.token }}
           postman-team-id: ${{ steps.postman-token.outputs.team-id }}
           github-token: ${{ secrets.GH_PAT }}
+
+      # The prod environment (used by the smoke monitor) has no runtime URL until the
+      # mock exists, so fill it in now.
+      - name: Point prod environment at the mock
+        continue-on-error: true
+        env:
+          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+          MOCK_URL: ${{ steps.onboard.outputs.mock-url }}
+          ENV_UIDS: ${{ steps.onboard.outputs.environment-uids-json }}
+        run: |
+          uid="$(echo "$ENV_UIDS" | jq -r '.prod // empty')"
+          if [ -z "$uid" ] || [ -z "$MOCK_URL" ]; then echo "prod env or mock url missing; skipping"; exit 0; fi
+          env_json="$(curl -fsS -H "X-API-Key: $POSTMAN_API_KEY" "https://api.getpostman.com/environments/$uid")"
+          echo "$env_json" | jq --arg url "$MOCK_URL" \
+            '{environment: (.environment | .values |= map(if .key=="baseUrl" then .value=$url else . end) | {name, values})}' \
+            | curl -fsS -X PUT -H "X-API-Key: $POSTMAN_API_KEY" -H "Content-Type: application/json" \
+                -d @- "https://api.getpostman.com/environments/$uid" >/dev/null
+          echo "prod baseUrl -> $MOCK_URL"
 
       - run: |
           echo "Workspace: ${{ steps.onboard.outputs.workspace-url }}"
