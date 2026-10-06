@@ -37,10 +37,22 @@ Optional, enables Postman Insights linking (human user, not the service account)
 * `INSIGHTS_POSTMAN_API_KEY`
 * `INSIGHTS_POSTMAN_ACCESS_TOKEN`
 
-The run reuses the existing Payments API workspace and generates collections
-(main, Smoke, Contract), environments, a private mock, a smoke monitor and a CI
-workflow (`.github/workflows/ci.yml`). The generated CI runs the Smoke and
-Contract collections against the `prod` environment, which points at the mock.
+The run generates collections (main, Smoke, Contract), `dev`/`prod` environments,
+a private mock and a smoke monitor in the target workspace, and commits the
+exported artifacts to `.postman/` and `postman/`. `.github/workflows/ci.yml` is
+maintained in the repo: it reads the Smoke/Contract collection IDs from
+`.postman/resources.yaml`, looks up the workspace's mock URL at run time and runs
+both collections against it.
+
+### Repeating the demo with a new workspace
+
+1. Delete the old workspace and re-import the service from APIM.
+2. Run the workflow and enter the new workspace ID (or change the `workspace-id`
+   default in `postman-onboarding.yml`). If the new workspace is in a different
+   sub-team, set `workspace-team-id` too.
+
+When the workspace ID changes, the workflow clears the previously generated
+`.postman/` and `postman/` files first, so nothing stale from the old workspace is reused.
 
 ## Insights demo (kind)
 
