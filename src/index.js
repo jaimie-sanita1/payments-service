@@ -22,11 +22,11 @@ const error = (res, status, message) => res.status(status).json({ error: message
 
 /**
  * POST /v1/payments
- * Idempotency-Key header is required; replaying a key returns the original payment.
+ * X-Idempotency-Key (or Idempotency-Key) header is required; replaying a key returns the original payment.
  */
 app.post("/v1/payments", (req, res) => {
-  const key = req.get("Idempotency-Key");
-  if (!key) return error(res, 400, "Idempotency-Key header is required");
+  const key = req.get("X-Idempotency-Key") || req.get("Idempotency-Key");
+  if (!key) return error(res, 400, "X-Idempotency-Key header is required");
 
   const { amount, currency, method } = req.body || {};
   if (!Number.isInteger(amount) || amount <= 0) return error(res, 400, "amount must be a positive integer");

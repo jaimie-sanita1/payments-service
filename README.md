@@ -11,7 +11,7 @@ Demo payments service used to show Postman API onboarding end to end.
 
 | Method | Path | Notes |
 |---|---|---|
-| POST | `/v1/payments` | Requires `Idempotency-Key`; replaying a key returns the original payment |
+| POST | `/v1/payments` | Requires `X-Idempotency-Key` (`Idempotency-Key` also accepted); replaying a key returns the original payment |
 | GET | `/v1/payments/{paymentId}` | `404` for unknown ids |
 | POST | `/v1/payments/{paymentId}/cancel` | Idempotent; `409` for `SETTLED`/`FAILED` payments |
 | GET | `/health` | Liveness/readiness |
