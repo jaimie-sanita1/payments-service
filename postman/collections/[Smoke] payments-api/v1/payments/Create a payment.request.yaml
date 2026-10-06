@@ -3,9 +3,14 @@ description: ""
 url: "{{baseUrl}}/v1/payments"
 method: POST
 headers:
-  Idempotency-Key: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-  Content-Type: application/json
-  Accept: application/json
+  - key: Idempotency-Key
+    value: '"7c9e6679-7425-40de-944b-e07fc1f90ae7"'
+    disabled: false
+    description: Structured Field String, so the value is wrapped in double quotes.
+  - key: Content-Type
+    value: application/json
+  - key: Accept
+    value: application/json
 body:
   type: json
   content: |-

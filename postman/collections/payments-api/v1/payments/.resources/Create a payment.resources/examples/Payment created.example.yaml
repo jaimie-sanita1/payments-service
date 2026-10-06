@@ -4,9 +4,9 @@ request:
   method: POST
   headers:
     - key: Idempotency-Key
-      value: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+      value: '"7c9e6679-7425-40de-944b-e07fc1f90ae7"'
       disabled: false
-      description: ""
+      description: Structured Field String, so the value is wrapped in double quotes.
     - key: Content-Type
       value: application/json
     - key: Accept
