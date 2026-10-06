@@ -1,0 +1,132 @@
+openapi: 3.0.3
+info:
+  title: Payments API (Mini)
+  version: 1.0.0
+servers:
+  - url: https://{tenant}.payments.{region}.example.com/api
+    variables:
+      tenant:
+        default: acme
+      region:
+        enum:
+          - us
+          - eu
+          - ap
+        default: us
+security:
+  - bearerAuth: []
+paths:
+  /v1/payments:
+    post:
+      summary: Create a payment
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentCreateRequest'
+      responses:
+        '201':
+          description: Payment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+  /v1/payments/{paymentId}:
+    get:
+      summary: Get payment status
+      parameters:
+        - name: paymentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Payment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '404':
+          description: Not found
+  /v1/payments/{paymentId}/cancel:
+    post:
+      summary: Cancel payment (pre‑settlement)
+      parameters:
+        - name: paymentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Cancelled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '409':
+          description: Cannot cancel
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Payment:
+      type: object
+      required:
+        - id
+        - amount
+        - currency
+        - status
+      properties:
+        id:
+          type: string
+        amount:
+          type: integer
+        currency:
+          type: string
+        status:
+          type: string
+          enum:
+            - PENDING
+            - AUTHORIZED
+            - SETTLED
+            - FAILED
+            - CANCELLED
+        createdAt:
+          type: string
+          format: date-time
+    PaymentCreateRequest:
+      type: object
+      required:
+        - amount
+        - currency
+        - method
+      properties:
+        amount:
+          type: integer
+        currency:
+          type: string
+        method:
+          $ref: '#/components/schemas/PaymentMethod'
+        description:
+          type: string
+    PaymentMethod:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - card
+        cardToken:
+          type: string
