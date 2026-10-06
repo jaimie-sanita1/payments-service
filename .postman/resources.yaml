@@ -1,0 +1,13 @@
+version: 2
+workspace:
+  id: a1ae5022-d368-4e0d-a65b-463f2099a9f5
+canonical:
+  collections:
+    ../postman/collections/payments-api: 56136551-8f44f444-20d5-5c49-a478-0f23ba31af00
+    ../postman/collections/[Smoke] payments-api: 56136551-6a833580-e152-5cba-9de0-52fa882ba983
+    ../postman/collections/[Contract] payments-api: 56136551-f653f171-f4e1-55e5-8e1b-d2b90f739f70
+  environments:
+    ../postman/environments/dev.postman_environment.json: 56136551-c054bdd8-6cde-44bb-842e-d2ce5342227f
+    ../postman/environments/prod.postman_environment.json: 56136551-070b9613-4164-4d80-b4b4-b98db7d9556d
+  specs:
+    ../openapi.yaml: 712a6f89-b340-426d-86cb-8ac7a9b7bf2c

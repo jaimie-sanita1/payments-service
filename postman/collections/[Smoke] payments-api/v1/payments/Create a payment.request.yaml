@@ -1,0 +1,51 @@
+$kind: http-request
+description: ""
+url: "{{baseUrl}}/v1/payments"
+method: POST
+headers:
+  Idempotency-Key: string
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "amount": 1394,
+      "currency": "string",
+      "method": {
+        "type": "card",
+        "cardToken": "string"
+      },
+      "description": "string"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      // [Smoke] Auto-generated test assertions
+
+      pm.test('Status code is not an error (2xx or 3xx)', function () {
+          // Smoke is a generic liveness check, not a contract: a 3xx redirect is a
+          // legitimate non-error response, so assert < 400 rather than strict 2xx.
+          pm.expect(pm.response.code, "expected a non-error HTTP status (< 400)").to.be.below(400);
+      });
+
+      pm.test('Response time is acceptable', function () {
+          var threshold = parseInt(pm.environment.get('RESPONSE_TIME_THRESHOLD') || '2000', 10);
+          pm.expect(pm.response.responseTime).to.be.below(threshold);
+      });
+
+      pm.test('Response body is not empty', function () {
+          var bodyless = pm.response.code === 204 || pm.response.code === 205 || pm.response.code === 304 || pm.request.method === 'HEAD';
+          var contentLength = pm.response.headers.get('Content-Length');
+          // A legitimate empty-body response (e.g. a 200/201 with Content-Length: 0)
+          // must not false-fail this generic smoke check.
+          if (contentLength !== null && contentLength !== undefined && String(contentLength).trim() === '0') { return; }
+          if (!bodyless) {
+              var body = pm.response.text();
+              pm.expect(body.length).to.be.above(0);
+          }
+      });
+    language: text/javascript
+settings: {}
+examples: ./.resources/Create a payment.resources/examples
+order: 1000

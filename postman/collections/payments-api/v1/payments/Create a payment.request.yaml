@@ -1,0 +1,23 @@
+$kind: http-request
+description: ""
+url: "{{baseUrl}}/v1/payments"
+method: POST
+headers:
+  Idempotency-Key: string
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "amount": 1394,
+      "currency": "string",
+      "method": {
+        "type": "card",
+        "cardToken": "string"
+      },
+      "description": "string"
+    }
+settings: {}
+examples: ./.resources/Create a payment.resources/examples
+order: 1000

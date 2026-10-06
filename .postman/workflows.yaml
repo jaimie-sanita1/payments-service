@@ -1,0 +1,26 @@
+workflows:
+  syncSpecToCollection:
+    - spec: ../openapi.yaml
+      collection: ../postman/collections/payments-api
+      options:
+        parametersResolution: Example
+        requestNameSource: Fallback
+        folderStrategy: Paths
+      syncOptions:
+        syncExamples: true
+    - spec: ../openapi.yaml
+      collection: ../postman/collections/[Smoke] payments-api
+      options:
+        parametersResolution: Example
+        requestNameSource: Fallback
+        folderStrategy: Paths
+      syncOptions:
+        syncExamples: true
+    - spec: ../openapi.yaml
+      collection: ../postman/collections/[Contract] payments-api
+      options:
+        parametersResolution: Example
+        requestNameSource: Fallback
+        folderStrategy: Paths
+      syncOptions:
+        syncExamples: true

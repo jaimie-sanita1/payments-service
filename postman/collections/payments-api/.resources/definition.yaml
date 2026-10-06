@@ -1,0 +1,31 @@
+$kind: collection
+description: ''
+variables:
+  tenant: acme
+  region: us
+  baseUrl: https://{{tenant}}.payments.{{region}}.example.com/api
+auth:
+  - id: b2cd4882-f36f-46e8-b0d5-06a10d6f0b0c
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: '{{bearerToken}}'
+scripts:
+  - type: http:beforeRequest
+    code: |-
+      // postman-enterprise-automation: private-mock-auth-root
+      var privateMockApiKey = pm.variables.get('postmanPrivateMockApiKey');
+      var privateMockHost = '';
+      try {
+        var privateMockUrl = pm.variables.replaceIn(pm.request.url.toString());
+        privateMockHost = new URL(privateMockUrl).hostname;
+      } catch (error) {
+        console.warn('Could not resolve the request URL for private mock authentication; x-api-key was not added.');
+      }
+      var isPrivateMockHost = /(^|\.)mock\.pstmn\.io$/i.test(privateMockHost);
+      if (isPrivateMockHost && privateMockApiKey) {
+        pm.request.headers.upsert({ key: 'x-api-key', value: privateMockApiKey });
+      } else if (isPrivateMockHost) {
+        console.warn('This mock server is private. Set the postmanPrivateMockApiKey variable to a Postman API key with access to it, or the request returns 401.');
+      }
+    language: text/javascript
