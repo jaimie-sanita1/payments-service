@@ -22,10 +22,11 @@ paths:
       parameters:
         - in: header
           name: Idempotency-Key
+          description: Structured Field String, so the value is wrapped in double quotes.
           required: true
           schema:
             type: string
-            example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+            example: '"7c9e6679-7425-40de-944b-e07fc1f90ae7"'
       requestBody:
         required: true
         content:
