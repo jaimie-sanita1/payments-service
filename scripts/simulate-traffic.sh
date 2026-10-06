@@ -35,7 +35,7 @@ request() {
   local out status
   out="$(curl -sS -X "${method}" "${BASE}${path}" \
     -H 'content-type: application/json' \
-    ${key:+-H "Idempotency-Key: ${key}"} \
+    ${key:+-H "X-Idempotency-Key: ${key}"} \
     ${payload:+-d "${payload}"} \
     -w $'\n__STATUS__:%{http_code}' || true)"
   status="$(echo "${out}" | sed -nE 's/^__STATUS__:(.*)$/\1/p' | tail -n 1)"
@@ -70,7 +70,7 @@ while true; do
   resp="$(request POST /v1/payments "${body}" "$(idem_key)")"
   pay_id="$(extract_id "${resp}")"
 
-  # Missing Idempotency-Key -> 400
+  # Missing X-Idempotency-Key -> 400
   maybe_bad && request POST /v1/payments "${good}" >/dev/null
 
   if chance "${READS_RATE}"; then
