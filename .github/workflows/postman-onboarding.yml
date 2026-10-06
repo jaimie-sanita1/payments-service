@@ -23,6 +23,7 @@ jobs:
         with:
           project-name: payments-api
           workspace-id: a1ae5022-d368-4e0d-a65b-463f2099a9f5
+          workspace-team-id: '132109'
           spec-path: openapi.yaml
           environments-json: '["dev","prod"]'
           mock-visibility: private
