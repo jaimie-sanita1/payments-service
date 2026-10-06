@@ -1,11 +1,10 @@
 $kind: http-request
-description: ""
+id: deee6062-c4c5-4d48-869e-fce498367167
 url: "{{baseUrl}}/v1/payments"
 method: POST
 headers:
   - key: X-Idempotency-Key
     value: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-    disabled: false
     description: Client-generated key; replaying it returns the original payment.
   - key: Content-Type
     value: application/json
@@ -23,6 +22,5 @@ body:
       },
       "description": "Order 4821"
     }
-settings: {}
 examples: ./.resources/Create a payment.resources/examples
-order: 1000
+order: 2000

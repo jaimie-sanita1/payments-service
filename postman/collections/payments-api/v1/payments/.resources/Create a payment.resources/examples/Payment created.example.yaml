@@ -1,11 +1,11 @@
 $kind: http-example
+id: 0dff2a75-37b1-4b15-b706-92f6e5e1e233
 request:
   url: "{{baseUrl}}/v1/payments"
   method: POST
   headers:
     - key: X-Idempotency-Key
       value: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-      disabled: false
       description: Client-generated key; replaying it returns the original payment.
     - key: Content-Type
       value: application/json

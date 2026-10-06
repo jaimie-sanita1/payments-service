@@ -1,4 +1,5 @@
 $kind: http-example
+id: b2ced65a-6918-438b-ae5d-e089d8eb3364
 request:
   url: "{{baseUrl}}/v1/payments/:paymentId/cancel"
   method: POST

@@ -1,15 +1,10 @@
 $kind: collection
-description: ''
+id: 8f44f444-20d5-5c49-a478-0f23ba31af00
+description: 'x-pm-onboarding-content-receipt: {"schemaVersion":1,"algorithm":"sha256","digest":"8416a694fe951ee645a3e5b591ff24400411dafc67a04ffcfcd5eeab9853112c"}'
 variables:
   tenant: acme
   region: us
   baseUrl: https://{{tenant}}.payments.{{region}}.example.com/api
-auth:
-  - id: f0cb1d1e-a48a-4ae8-8113-9a98b2b5dceb
-    type: bearer
-    name: bearer auth
-    credentials:
-      token: '{{bearerToken}}'
 scripts:
   - type: http:beforeRequest
     code: |-
@@ -29,3 +24,9 @@ scripts:
         console.warn('This mock server is private. Set the postmanPrivateMockApiKey variable to a Postman API key with access to it, or the request returns 401.');
       }
     language: text/javascript
+auth:
+  - id: c7461427-1fb5-4f7f-ab12-66cc069362f2
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{bearerToken}}"

@@ -1,5 +1,5 @@
 $kind: http-request
-description: ""
+id: c64a106f-5cdb-46ca-abfc-4c57bfac04e6
 url: "{{baseUrl}}/v1/payments/:paymentId/cancel"
 method: POST
 headers:
@@ -37,6 +37,5 @@ scripts:
           }
       });
     language: text/javascript
-settings: {}
 examples: ./.resources/Cancel payment (pre‑settlement).resources/examples
 order: 1000
