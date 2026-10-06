@@ -1,11 +1,10 @@
 $kind: http-request
-description: ""
+id: 35c91647-9f37-4538-9e69-be55ebe9fc9d
 url: "{{baseUrl}}/v1/payments"
 method: POST
 headers:
   - key: Idempotency-Key
     value: '"7c9e6679-7425-40de-944b-e07fc1f90ae7"'
-    disabled: false
     description: Structured Field String, so the value is wrapped in double quotes.
   - key: Content-Type
     value: application/json
@@ -23,6 +22,5 @@ body:
       },
       "description": "Order 4821"
     }
-settings: {}
 examples: ./.resources/Create a payment.resources/examples
-order: 1000
+order: 2000

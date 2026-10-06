@@ -1,5 +1,5 @@
 $kind: http-request
-description: ""
+id: 7035a7f9-2f67-4845-b250-5b3610cfc376
 url: "{{baseUrl}}/v1/payments/:paymentId/cancel"
 method: POST
 headers:
@@ -9,6 +9,5 @@ pathVariables:
 body:
   type: text
   content: ""
-settings: {}
 examples: ./.resources/Cancel payment (pre‑settlement).resources/examples
 order: 1000

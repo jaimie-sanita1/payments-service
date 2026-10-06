@@ -1,11 +1,11 @@
 $kind: http-example
+id: a1ccf4e5-4c8e-4416-90d2-1a680198e4c0
 request:
   url: "{{baseUrl}}/v1/payments"
   method: POST
   headers:
     - key: Idempotency-Key
       value: '"7c9e6679-7425-40de-944b-e07fc1f90ae7"'
-      disabled: false
       description: Structured Field String, so the value is wrapped in double quotes.
     - key: Content-Type
       value: application/json

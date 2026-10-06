@@ -1,5 +1,6 @@
 $kind: collection
-description: ''
+id: f653f171-f4e1-55e5-8e1b-d2b90f739f70
+description: 'x-pm-onboarding-content-receipt: {"schemaVersion":1,"algorithm":"sha256","digest":"c3098bb80745ef6e9e5a2fa64bc28f19264543c89b2d845ca485f4031200368d"}'
 variables:
   tenant: acme
   region: us
@@ -1815,8 +1816,8 @@ scripts:
       }
     language: text/javascript
 auth:
-  - id: 140817d8-4528-40dc-89a8-d0ba2addec2c
+  - id: 04f8f214-5408-42eb-b0fa-1c6fa8d9a4bb
     type: bearer
     name: bearer auth
     credentials:
-      token: '{{bearerToken}}'
+      token: "{{bearerToken}}"
