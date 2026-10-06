@@ -34,18 +34,6 @@ jobs:
             rm -rf .postman postman
           fi
 
-      # Without this, every run creates another mock in the workspace.
-      - id: mock
-        name: Find existing mock
-        env:
-          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
-        run: |
-          url="$(curl -fsS -H "X-API-Key: $POSTMAN_API_KEY" \
-            "https://api.getpostman.com/mocks?workspace=${{ inputs.workspace-id }}" \
-            | jq -r '[.mocks[] | select(.name == "payments-api Mock")] | first | .mockUrl // empty' || true)"
-          echo "url=$url" >> "$GITHUB_OUTPUT"
-          echo "existing mock: ${url:-none}"
-
       - id: postman-token
         uses: postman-cs/postman-resolve-service-token-action@v2
         with:
@@ -61,7 +49,6 @@ jobs:
           spec-path: openapi.yaml
           environments-json: '["dev","prod"]'
           mock-visibility: private
-          mock-url: ${{ steps.mock.outputs.url }}
           # ci.yml is maintained in the repo; it looks the mock URL up at run time
           generate-ci-workflow: 'false'
           # dev -> local kind cluster behind ingress-nginx
