@@ -32,7 +32,7 @@ jobs:
           postman-api-key: ${{ secrets.POSTMAN_API_KEY }}
           postman-access-token: ${{ steps.postman-token.outputs.token }}
           postman-team-id: ${{ steps.postman-token.outputs.team-id }}
-          github-token: ${{ github.token }}
+          github-token: ${{ secrets.GH_PAT }}
 
       - run: |
           echo "Workspace: ${{ steps.onboard.outputs.workspace-url }}"
