@@ -1,5 +1,4 @@
 $kind: http-example
-id: 56130e2a-9f34-4656-973e-8e2cf62f7ff8
 request:
   url: "{{baseUrl}}/v1/payments/:paymentId"
   method: GET

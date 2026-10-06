@@ -5,22 +5,22 @@
       "role": "baseline",
       "collectionPath": "postman/collections/payments-api",
       "cloudId": "56136551-8f44f444-20d5-5c49-a478-0f23ba31af00",
-      "payloadDigest": "7175e8060c4219f1df3925e9851af95cf713a779137b531356c578572c649954",
-      "artifactDigest": "db280fae8b1de3f7445f9eb46ddc56bb0fb7089bd32d8e9d553c8e60f03f5f7b"
+      "payloadDigest": "87bc7ddee46076faf41443e1e96447148d1562dc35716839677078f12a9d4cef",
+      "artifactDigest": "557ab9664a3e5f2123e5dd484f421a55b2ab3dba8d3604362ba91f2b69409d20"
     },
     {
       "role": "smoke",
       "collectionPath": "postman/collections/[Smoke] payments-api",
       "cloudId": "56136551-6a833580-e152-5cba-9de0-52fa882ba983",
-      "payloadDigest": "4f0202aac947805c36f4f1725579d0eac89c8d67e129a60abee46a88bd6290d2",
-      "artifactDigest": "80982904d8691518a1fbc927ebb6c28790da2cef04891e1638d69c1878595419"
+      "payloadDigest": "b0dc81516d696e54712a8b39705791c5de2b93d532459069aacf95a96ea6d98b",
+      "artifactDigest": "52f82bd61289f02fb7a6418b936b11fe0d05e866d9668a23f923b968ceb86e50"
     },
     {
       "role": "contract",
       "collectionPath": "postman/collections/[Contract] payments-api",
       "cloudId": "56136551-f653f171-f4e1-55e5-8e1b-d2b90f739f70",
-      "payloadDigest": "c3098bb80745ef6e9e5a2fa64bc28f19264543c89b2d845ca485f4031200368d",
-      "artifactDigest": "a9ba9050f9b92e29c3eb34349c245354fd47fa62b166ac1b57392d65370e529c"
+      "payloadDigest": "614269e95d8f6c52315146000071f1eee25cf64fd9e672a4006c7250fd32cf8f",
+      "artifactDigest": "2afefeb7cd4ddb8273543e019cc24daba25f4d058d7494ee56c5e78edb71d166"
     }
   ]
 }

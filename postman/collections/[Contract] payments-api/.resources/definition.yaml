@@ -1,6 +1,5 @@
 $kind: collection
-id: f653f171-f4e1-55e5-8e1b-d2b90f739f70
-description: 'x-pm-onboarding-content-receipt: {"schemaVersion":1,"algorithm":"sha256","digest":"c3098bb80745ef6e9e5a2fa64bc28f19264543c89b2d845ca485f4031200368d"}'
+description: ''
 variables:
   tenant: acme
   region: us
@@ -1244,7 +1243,7 @@ scripts:
       var requestBodyValidators = {};
       var paramValidators = {};
       var contractSkippedValidators = [];
-      var contract = JSON.parse("{\"method\":\"POST\",\"path\":\"/v1/payments\",\"responses\":{\"201\":{\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\",\"required\":[\"id\",\"amount\",\"currency\",\"status\"],\"properties\":{\"id\":{\"type\":\"string\"},\"amount\":{\"type\":\"integer\"},\"currency\":{\"type\":\"string\"},\"status\":{\"type\":\"string\",\"enum\":[\"PENDING\",\"AUTHORIZED\",\"SETTLED\",\"FAILED\",\"CANCELLED\"]},\"createdAt\":{\"type\":\"string\",\"format\":\"date-time\"}},\"$schema\":\"http://json-schema.org/draft-07/schema#\"}}},\"bodyExpectation\":\"declared\",\"headers\":[]}},\"security\":[[{\"scheme\":\"bearerAuth\",\"kind\":\"http:bearer\",\"checkable\":true,\"prefix\":\"Bearer \",\"bearerFormat\":\"JWT\"}]],\"parameters\":[{\"in\":\"header\",\"name\":\"Idempotency-Key\",\"required\":true,\"schema\":{\"type\":\"string\",\"$schema\":\"http://json-schema.org/draft-07/schema#\"}}],\"pathMethods\":[\"POST\"],\"servers\":[\"^https://[^/]*\\\\.payments\\\\.(us|eu|ap)\\\\.example\\\\.com/api\"]}");
+      var contract = JSON.parse("{\"method\":\"POST\",\"path\":\"/v1/payments\",\"responses\":{\"201\":{\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\",\"required\":[\"id\",\"amount\",\"currency\",\"status\"],\"properties\":{\"id\":{\"type\":\"string\"},\"amount\":{\"type\":\"integer\"},\"currency\":{\"type\":\"string\"},\"status\":{\"type\":\"string\",\"enum\":[\"PENDING\",\"AUTHORIZED\",\"SETTLED\",\"FAILED\",\"CANCELLED\"]},\"createdAt\":{\"type\":\"string\",\"format\":\"date-time\"}},\"$schema\":\"http://json-schema.org/draft-07/schema#\"}}},\"bodyExpectation\":\"declared\",\"headers\":[]}},\"security\":[[{\"scheme\":\"bearerAuth\",\"kind\":\"http:bearer\",\"checkable\":true,\"prefix\":\"Bearer \",\"bearerFormat\":\"JWT\"}]],\"parameters\":[{\"in\":\"header\",\"name\":\"Idempotency-Key\",\"required\":true,\"content\":true,\"schema\":{\"type\":\"string\",\"$schema\":\"http://json-schema.org/draft-07/schema#\"}}],\"pathMethods\":[\"POST\"],\"servers\":[\"^https://[^/]*\\\\.payments\\\\.(us|eu|ap)\\\\.example\\\\.com/api\"]}");
       var rfcRegistries = JSON.parse("{\"proxyStatusErrors\":[\"dns_timeout\",\"dns_error\",\"destination_not_found\",\"destination_unavailable\",\"destination_ip_prohibited\",\"destination_ip_unroutable\",\"connection_refused\",\"connection_terminated\",\"connection_timeout\",\"connection_read_timeout\",\"connection_write_timeout\",\"connection_limit_reached\",\"tls_protocol_error\",\"tls_certificate_error\",\"tls_alert_received\",\"http_request_error\",\"http_request_denied\",\"http_response_incomplete\",\"http_response_header_section_size\",\"http_response_header_size\",\"http_response_body_size\",\"http_response_trailer_section_size\",\"http_response_trailer_size\",\"http_response_transfer_coding\",\"http_response_content_coding\",\"http_response_timeout\",\"http_upgrade_failed\",\"http_protocol_error\",\"proxy_internal_response\",\"proxy_internal_error\",\"proxy_configuration_error\",\"proxy_loop_detected\"],\"referrerPolicies\":[\"\",\"no-referrer\",\"no-referrer-when-downgrade\",\"same-origin\",\"origin\",\"strict-origin\",\"origin-when-cross-origin\",\"strict-origin-when-cross-origin\",\"unsafe-url\"],\"forbiddenTrailers\":[\"transfer-encoding\",\"content-length\",\"host\",\"cache-control\",\"expect\",\"max-forwards\",\"pragma\",\"range\",\"te\",\"if-match\",\"if-none-match\",\"if-modified-since\",\"if-unmodified-since\",\"if-range\",\"authorization\",\"proxy-authenticate\",\"proxy-authorization\",\"www-authenticate\",\"cookie\",\"set-cookie\",\"age\",\"expires\",\"date\",\"location\",\"retry-after\",\"vary\",\"warning\",\"content-encoding\",\"content-type\",\"content-range\",\"trailer\"],\"contentCodings\":[\"aes128gcm\",\"br\",\"compress\",\"dcb\",\"dcz\",\"deflate\",\"exi\",\"gzip\",\"identity\",\"pack200-gzip\",\"x-compress\",\"x-gzip\",\"zstd\"]}");
       var validators = {};
       var linkTargetValidators = {};
@@ -1816,8 +1815,8 @@ scripts:
       }
     language: text/javascript
 auth:
-  - id: 04f8f214-5408-42eb-b0fa-1c6fa8d9a4bb
+  - id: 756f44ae-2c8a-426d-ab4a-4400c0bc4735
     type: bearer
     name: bearer auth
     credentials:
-      token: "{{bearerToken}}"
+      token: '{{bearerToken}}'

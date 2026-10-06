@@ -1,11 +1,12 @@
 $kind: http-request
-id: a3a51a4e-7302-4a7e-a73b-ffdf6cc590d0
+description: ""
 url: "{{baseUrl}}/v1/payments"
 method: POST
 headers:
   - key: Idempotency-Key
-    value: '"7c9e6679-7425-40de-944b-e07fc1f90ae7"'
-    description: Structured Field String, so the value is wrapped in double quotes.
+    value: ""
+    disabled: false
+    description: "Client-generated key. Serialized as a JSON string (content: application/json), so on the wire the value is wrapped in double quotes, which is also a valid Structured Field String."
   - key: Content-Type
     value: application/json
   - key: Accept
@@ -22,5 +23,6 @@ body:
       },
       "description": "Order 4821"
     }
+settings: {}
 examples: ./.resources/Create a payment.resources/examples
-order: 2000
+order: 1000

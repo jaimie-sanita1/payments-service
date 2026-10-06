@@ -1,5 +1,5 @@
 $kind: http-request
-id: 971cd21f-25bf-409a-8968-6401458af71a
+description: ""
 url: "{{baseUrl}}/v1/payments/:paymentId"
 method: GET
 headers:
@@ -37,5 +37,6 @@ scripts:
           }
       });
     language: text/javascript
+settings: {}
 examples: ./.resources/Get payment status.resources/examples
-order: 2000
+order: 1000

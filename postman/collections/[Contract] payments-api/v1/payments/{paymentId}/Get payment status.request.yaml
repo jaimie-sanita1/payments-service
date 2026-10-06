@@ -1,5 +1,5 @@
 $kind: http-request
-id: 6e54c141-9610-4015-97d3-11c6f74af09b
+description: ""
 url: "{{baseUrl}}/v1/payments/:paymentId"
 method: GET
 headers:
@@ -9,5 +9,6 @@ pathVariables:
 body:
   type: text
   content: ""
+settings: {}
 examples: ./.resources/Get payment status.resources/examples
-order: 2000
+order: 1000
