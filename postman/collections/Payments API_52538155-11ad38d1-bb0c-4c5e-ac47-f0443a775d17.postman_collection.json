@@ -1,0 +1,430 @@
+{
+  "info": {
+    "_postman_id": "11ad38d1-bb0c-4c5e-ac47-f0443a775d17",
+    "name": "Payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Retrieve resource",
+      "id": "6450540f-1134-4d28-9b8a-c13f36299e74",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/resource?param1=sample&param2=8667.843384248758",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "resource"
+          ],
+          "query": [
+            {
+              "description": "A sample parameter that is required and has a default value of \"sample\".",
+              "key": "param1",
+              "value": "sample"
+            },
+            {
+              "description": "Another sample parameter, set to not required.",
+              "key": "param2",
+              "value": "8667.843384248758"
+            }
+          ]
+        },
+        "description": "A demonstration of a GET call on a sample resource. It is handled by an \"echo\" backend which returns a response equal to the request (the supplied headers and body are being returned as received)."
+      },
+      "response": [
+        {
+          "id": "f8ff8e1b-c7b6-4118-b066-a2dc49aa8ddb",
+          "name": "Returned in all cases.",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "Added as a part of security scheme: apikey",
+                "key": "Ocp-Apim-Subscription-Key",
+                "value": "<API Key>"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/resource?param1=sample&param2=8667.843384248758",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "resource"
+              ],
+              "query": [
+                {
+                  "description": "A sample parameter that is required and has a default value of \"sample\".",
+                  "key": "param1",
+                  "value": "sample"
+                },
+                {
+                  "description": "Another sample parameter, set to not required.",
+                  "key": "param2",
+                  "value": "8667.843384248758"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": [],
+          "cookie": [],
+          "responseTime": null,
+          "body": null
+        }
+      ]
+    },
+    {
+      "name": "Modify Resource",
+      "id": "3b28de46-cf11-40f6-b5bb-2954a5ba8fca",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/resource",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "resource"
+          ]
+        },
+        "description": "A demonstration of a PUT call handled by the same \"echo\" backend as above. You can now specify a request body in addition to headers and it will be returned as well."
+      },
+      "response": [
+        {
+          "id": "c7b8d755-d229-412e-a289-e70842ba6f91",
+          "name": "200",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [
+              {
+                "description": "Added as a part of security scheme: apikey",
+                "key": "Ocp-Apim-Subscription-Key",
+                "value": "<API Key>"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/resource",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "resource"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": [],
+          "cookie": [],
+          "responseTime": null,
+          "body": null
+        }
+      ]
+    },
+    {
+      "name": "Create resource",
+      "id": "0f19d55e-7652-4c23-9f5d-e9a4ed05fa76",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"vehicleType\": \"train\",\n  \"maxSpeed\": 125,\n  \"avgSpeed\": 90,\n  \"speedUnit\": \"mph\"\n}",
+          "options": {
+            "raw": {
+              "headerFamily": "json",
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/resource",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "resource"
+          ]
+        },
+        "description": "A demonstration of a POST call based on the echo backend above. The request body is expected to contain JSON-formatted data (see example below). A policy is used to automatically transform any request sent in JSON directly to XML. In a real-world scenario this could be used to enable modern clients to speak to a legacy backend."
+      },
+      "response": [
+        {
+          "id": "6b1fec66-8548-455d-b002-54d0df40b50d",
+          "name": "200",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "description": "Added as a part of security scheme: apikey",
+                "key": "Ocp-Apim-Subscription-Key",
+                "value": "<API Key>"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vehicleType\": \"train\",\n  \"maxSpeed\": 125,\n  \"avgSpeed\": 90,\n  \"speedUnit\": \"mph\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/resource",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "resource"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": [],
+          "cookie": [],
+          "responseTime": null,
+          "body": null
+        }
+      ]
+    },
+    {
+      "name": "Remove resource",
+      "id": "cceeda8e-35bd-4691-9226-f19078ce9643",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/resource",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "resource"
+          ]
+        },
+        "description": "A demonstration of a DELETE call which traditionally deletes the resource. It is based on the same \"echo\" backend as in all other operations so nothing is actually deleted."
+      },
+      "response": [
+        {
+          "id": "204a113d-b0e8-490b-8560-bade01e47834",
+          "name": "200",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [
+              {
+                "description": "Added as a part of security scheme: apikey",
+                "key": "Ocp-Apim-Subscription-Key",
+                "value": "<API Key>"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/resource",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "resource"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": [],
+          "cookie": [],
+          "responseTime": null,
+          "body": null
+        }
+      ]
+    },
+    {
+      "name": "Retrieve header only",
+      "id": "2f729f25-1f12-4c8a-872d-d77ea652a702",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "HEAD",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/resource",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "resource"
+          ]
+        },
+        "description": "The HEAD operation returns only headers. In this demonstration a policy is used to set additional headers when the response is returned and to enable JSONP."
+      },
+      "response": [
+        {
+          "id": "00d83d6a-013c-46bf-a440-f36bc4d70da3",
+          "name": "200",
+          "originalRequest": {
+            "method": "HEAD",
+            "header": [
+              {
+                "description": "Added as a part of security scheme: apikey",
+                "key": "Ocp-Apim-Subscription-Key",
+                "value": "<API Key>"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/resource",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "resource"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": [],
+          "cookie": [],
+          "responseTime": null,
+          "body": null
+        }
+      ]
+    },
+    {
+      "name": "Retrieve resource (cached)",
+      "id": "24785bf4-530d-4293-9517-d0c1012920ff",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/resource-cached?param1=sample&param2=string",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "resource-cached"
+          ],
+          "query": [
+            {
+              "description": "A sample parameter that is required and has a default value of \"sample\".",
+              "key": "param1",
+              "value": "sample"
+            },
+            {
+              "description": "Another sample parameter, set to not required.",
+              "key": "param2",
+              "value": "string"
+            }
+          ]
+        },
+        "description": "A demonstration of a GET call with caching enabled on the same \"echo\" backend as above. Cache TTL is set to 1 hour. When you make the first request the headers you supplied will be cached. Subsequent calls will return the same headers as the first time even if you change them in your request."
+      },
+      "response": [
+        {
+          "id": "486451ef-1fb6-465b-a20a-b06eafd4c794",
+          "name": "200",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "Added as a part of security scheme: apikey",
+                "key": "Ocp-Apim-Subscription-Key",
+                "value": "<API Key>"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/resource-cached?param1=sample&param2=string",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "resource-cached"
+              ],
+              "query": [
+                {
+                  "description": "A sample parameter that is required and has a default value of \"sample\".",
+                  "key": "param1",
+                  "value": "sample"
+                },
+                {
+                  "description": "Another sample parameter, set to not required.",
+                  "key": "param2",
+                  "value": "string"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": [],
+          "cookie": [],
+          "responseTime": null,
+          "body": null
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Ocp-Apim-Subscription-Key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://integrations.azure-api.net/echo/v1"
+    }
+  ]
+}
