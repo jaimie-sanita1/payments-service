@@ -1,0 +1,38 @@
+name: Postman API onboarding
+
+on:
+  workflow_dispatch:
+
+jobs:
+  onboarding:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+
+      - id: postman-token
+        uses: postman-cs/postman-resolve-service-token-action@v2
+        with:
+          postman-api-key: ${{ secrets.POSTMAN_API_KEY }}
+          postman-region: us
+
+      - id: onboard
+        uses: postman-cs/postman-api-onboarding-action@v3
+        with:
+          project-name: payments-api
+          workspace-id: a1ae5022-d368-4e0d-a65b-463f2099a9f5
+          spec-path: openapi.yaml
+          environments-json: '["dev","prod"]'
+          mock-visibility: private
+          generate-ci-workflow: 'true'
+          postman-region: us
+          postman-api-key: ${{ secrets.POSTMAN_API_KEY }}
+          postman-access-token: ${{ steps.postman-token.outputs.token }}
+          postman-team-id: ${{ steps.postman-token.outputs.team-id }}
+          github-token: ${{ github.token }}
+
+      - run: |
+          echo "Workspace: ${{ steps.onboard.outputs.workspace-url }}"
+          echo "Mock: ${{ steps.onboard.outputs.mock-url }}"

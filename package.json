@@ -1,7 +1,7 @@
 {
-  "name": "accounts-api",
+  "name": "payments-api",
   "version": "1.0.0",
-  "description": "Demo accounts service",
+  "description": "Demo payments service",
   "main": "index.js",
   "type": "commonjs",
   "scripts": {

@@ -1,8 +1,8 @@
-# Accounts API (Orchestrator) — README.md
+# Payments API (Orchestrator) — README.md
 
 ## Overview
 
-The Accounts API both:
+The Payments API both:
 
 1. Runs as a service
 2. Orchestrates the entire demo environment
