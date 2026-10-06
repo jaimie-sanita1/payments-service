@@ -9,7 +9,8 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 POSTMAN_API_KEY="${POSTMAN_API_KEY:-}"
 PAYMENTS_PROJECT_ID="${PAYMENTS_PROJECT_ID:-}"
 PAYMENTS_WORKSPACE_ID="${PAYMENTS_WORKSPACE_ID:-a1ae5022-d368-4e0d-a65b-463f2099a9f5}"
-POSTMAN_SYSTEM_ENV="${POSTMAN_SYSTEM_ENV:-}"
+# API Catalog system environment the pod reports as; default is "Local" in the demo team
+POSTMAN_SYSTEM_ENV="${POSTMAN_SYSTEM_ENV:-0a9e9dd6-12a3-47f4-a311-b50e598aac0c}"
 
 if [[ -z "${POSTMAN_API_KEY}" || -z "${PAYMENTS_PROJECT_ID}" ]]; then
   echo "ERROR: missing required env vars."
@@ -18,7 +19,7 @@ if [[ -z "${POSTMAN_API_KEY}" || -z "${PAYMENTS_PROJECT_ID}" ]]; then
   echo "  PAYMENTS_PROJECT_ID"
   echo "Optional:"
   echo "  PAYMENTS_WORKSPACE_ID (defaults to the Payments API workspace)"
-  echo "  POSTMAN_SYSTEM_ENV"
+  echo "  POSTMAN_SYSTEM_ENV (defaults to the Local system environment)"
   exit 1
 fi
 

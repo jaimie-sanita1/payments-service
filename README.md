@@ -63,7 +63,7 @@ in Postman (copy its `svc_...` Project ID).
 export POSTMAN_API_KEY="PMAK_xxxxx"        # human-user key
 export PAYMENTS_PROJECT_ID="svc_xxxxx"
 export PAYMENTS_WORKSPACE_ID="a1ae5022-d368-4e0d-a65b-463f2099a9f5"   # default
-export POSTMAN_SYSTEM_ENV="<system-env-uuid>"                          # optional
+export POSTMAN_SYSTEM_ENV="<system-env-uuid>"                          # optional, defaults to "Local"
 
 ./scripts/run-demo.sh                       # cluster, ingress, Insights agent, payments-api
 ./scripts/simulate-traffic.sh --verbose --slow

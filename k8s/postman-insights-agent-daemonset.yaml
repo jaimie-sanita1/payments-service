@@ -65,6 +65,9 @@ spec:
               fieldPath: spec.nodeName
         - name: POSTMAN_INSIGHTS_CRI_ENDPOINT
           value: /var/run/containerd/containerd.sock
+        # Must match the workflow's cluster-name so the onboarding action can find demo/payments-api
+        - name: POSTMAN_INSIGHTS_CLUSTER_NAME
+          value: demo
         image: public.ecr.aws/postman/postman-insights-agent:latest
         imagePullPolicy: Always
         name: postman-insights-agent
