@@ -25,7 +25,7 @@ scripts:
       }
     language: text/javascript
 auth:
-  - id: 6ae74b62-7166-4ea1-b6d4-034b6bcd52f0
+  - id: 5e5b8cbd-a0ea-4277-8f31-dfea68ca17db
     type: bearer
     name: bearer auth
     credentials:
