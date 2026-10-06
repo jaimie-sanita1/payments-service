@@ -65,7 +65,9 @@ jobs:
           github-token: ${{ secrets.GH_PAT }}
 
       # The prod environment (used by the smoke monitor) has no runtime URL until the
-      # mock exists, so fill it in now.
+      # mock exists, so fill it in now. The mock must also use prod: it builds its routes
+      # from the environment's baseUrl, and dev's http://localhost/payments adds a path
+      # prefix that makes every mock request 404.
       - name: Point prod environment at the mock
         continue-on-error: true
         env:
@@ -81,6 +83,12 @@ jobs:
             | curl -fsS -X PUT -H "X-API-Key: $POSTMAN_API_KEY" -H "Content-Type: application/json" \
                 -d @- "https://api.getpostman.com/environments/$uid" >/dev/null
           echo "prod baseUrl -> $MOCK_URL"
+          mock_id="${MOCK_URL#https://}"; mock_id="${mock_id%%.*}"
+          collection="$(curl -fsS -H "X-API-Key: $POSTMAN_API_KEY" "https://api.getpostman.com/mocks/$mock_id" | jq -r '.mock.collection')"
+          jq -n --arg c "$collection" --arg e "$uid" '{mock: {collection: $c, environment: $e, private: true}}' \
+            | curl -fsS -X PUT -H "X-API-Key: $POSTMAN_API_KEY" -H "Content-Type: application/json" \
+                -d @- "https://api.getpostman.com/mocks/$mock_id" >/dev/null
+          echo "mock environment -> prod"
 
       - run: |
           echo "Workspace: ${{ steps.onboard.outputs.workspace-url }}"
