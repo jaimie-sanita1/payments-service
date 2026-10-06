@@ -3,10 +3,10 @@ request:
   url: "{{baseUrl}}/v1/payments"
   method: POST
   headers:
-    - key: Idempotency-Key
-      value: ""
+    - key: X-Idempotency-Key
+      value: 7c9e6679-7425-40de-944b-e07fc1f90ae7
       disabled: false
-      description: "Client-generated key. Serialized as a JSON string (content: application/json), so on the wire the value is wrapped in double quotes, which is also a valid Structured Field String."
+      description: Client-generated key; replaying it returns the original payment.
     - key: Content-Type
       value: application/json
     - key: Accept
