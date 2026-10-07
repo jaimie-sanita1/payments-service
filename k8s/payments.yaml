@@ -23,13 +23,8 @@ spec:
           env:
             - name: PORT
               value: "3002"
-            # Insights (rendered by scripts/run-demo.sh)
-            # Get from Insights in Workspace
-            - name: POSTMAN_INSIGHTS_PROJECT_ID
-              value: "__PAYMENTS_PROJECT_ID__"
-            - name: POSTMAN_INSIGHTS_API_KEY
-              value: "__POSTMAN_API_KEY__"
-            # Get from API Catalog
+            # Insights: the DaemonSet agent runs in discovery mode and links this
+            # pod to the workspace. WORKSPACE_ID and PROJECT_ID are mutually exclusive.
             - name: POSTMAN_INSIGHTS_WORKSPACE_ID
               value: "__PAYMENTS_WORKSPACE_ID__"
             - name: POSTMAN_INSIGHTS_SYSTEM_ENV
