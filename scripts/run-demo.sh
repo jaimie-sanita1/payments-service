@@ -7,16 +7,14 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 # required Postman vars
 POSTMAN_API_KEY="${POSTMAN_API_KEY:-}"
-PAYMENTS_PROJECT_ID="${PAYMENTS_PROJECT_ID:-}"
 PAYMENTS_WORKSPACE_ID="${PAYMENTS_WORKSPACE_ID:-a1ae5022-d368-4e0d-a65b-463f2099a9f5}"
 # API Catalog system environment the pod reports as; default is "Local" in the demo team
 POSTMAN_SYSTEM_ENV="${POSTMAN_SYSTEM_ENV:-0a9e9dd6-12a3-47f4-a311-b50e598aac0c}"
 
-if [[ -z "${POSTMAN_API_KEY}" || -z "${PAYMENTS_PROJECT_ID}" ]]; then
+if [[ -z "${POSTMAN_API_KEY}" ]]; then
   echo "ERROR: missing required env vars."
   echo "Required:"
   echo "  POSTMAN_API_KEY"
-  echo "  PAYMENTS_PROJECT_ID"
   echo "Optional:"
   echo "  PAYMENTS_WORKSPACE_ID (defaults to the Payments API workspace)"
   echo "  POSTMAN_SYSTEM_ENV (defaults to the Local system environment)"
@@ -78,6 +76,9 @@ kind load docker-image payments-api:dev --name "${CLUSTER_NAME}"
 # 4) Install Postman Insights Agent DaemonSet
 #####################################
 echo "🛰️  Installing Postman Insights Agent DaemonSet..."
+kubectl create namespace postman-insights-namespace --dry-run=client -o yaml | kubectl apply -f -
+kubectl -n postman-insights-namespace create secret generic postman-agent-secrets \
+  --from-literal=postman-api-key="${POSTMAN_API_KEY}" --dry-run=client -o yaml | kubectl apply -f -
 kubectl apply -f "${ROOT_DIR}/k8s/postman-insights-agent-daemonset.yaml"
 
 # For kind: toleration to schedule on control-plane if needed (harmless if already allowed)
@@ -102,9 +103,7 @@ render_apply() {
   local out_file="$2"
 
   sed \
-    -e "s|__POSTMAN_API_KEY__|${POSTMAN_API_KEY}|g" \
     -e "s|__POSTMAN_SYSTEM_ENV__|${POSTMAN_SYSTEM_ENV}|g" \
-    -e "s|__PAYMENTS_PROJECT_ID__|${PAYMENTS_PROJECT_ID}|g" \
     -e "s|__PAYMENTS_WORKSPACE_ID__|${PAYMENTS_WORKSPACE_ID}|g" \
     "${in_file}" > "${out_file}"
 

@@ -58,7 +58,14 @@ spec:
         - kube
         - run
         - --repro-mode
+        - --discovery-mode
         env:
+        # Created by scripts/run-demo.sh from POSTMAN_API_KEY
+        - name: POSTMAN_INSIGHTS_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: postman-agent-secrets
+              key: postman-api-key
         - name: POSTMAN_INSIGHTS_K8S_NODE
           valueFrom:
             fieldRef:

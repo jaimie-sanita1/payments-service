@@ -56,21 +56,21 @@ When the workspace ID changes, the workflow clears the previously generated
 
 ## Insights demo (kind)
 
-Prerequisites: Docker, kind, kubectl, curl, and an Insights project for the service
-in Postman (copy its `svc_...` Project ID).
+Prerequisites: Docker, kind, kubectl, curl, and a Postman API key for a user in the team.
 
 ```bash
-export POSTMAN_API_KEY="PMAK_xxxxx"        # human-user key
-export PAYMENTS_PROJECT_ID="svc_xxxxx"
+export POSTMAN_API_KEY="PMAK_xxxxx"
 export PAYMENTS_WORKSPACE_ID="a1ae5022-d368-4e0d-a65b-463f2099a9f5"   # default
 export POSTMAN_SYSTEM_ENV="<system-env-uuid>"                          # optional, defaults to "Local"
 
 ./scripts/run-demo.sh                       # cluster, ingress, Insights agent, payments-api
-./scripts/simulate-traffic.sh --verbose --slow
+./scripts/simulate-traffic.sh --slow
 ```
 
-Wait ~5-10 minutes for Insights to infer endpoints, then run the onboarding
-workflow so it can link the discovered service to the workspace.
+The agent runs as a DaemonSet in discovery mode (cluster name `demo`). `payments-api`
+carries the workspace ID and system environment, so Insights links the service to the
+workspace and shows it in the API Catalog under that system environment. Allow a few
+minutes for endpoint inference.
 
 Teardown:
 
