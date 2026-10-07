@@ -8,11 +8,11 @@ on:
       workspace-id:
         description: Postman workspace to onboard
         required: true
-        default: a1ae5022-d368-4e0d-a65b-463f2099a9f5
+        default: aaedd86b-90dc-47ee-a67d-4fbbfd5b1053
       workspace-team-id:
         description: Sub-team that owns the workspace (leave default unless it moved teams)
         required: true
-        default: '132109'
+        default: '134958'
 
 jobs:
   onboarding:
